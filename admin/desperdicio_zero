@@ -1,26 +1,15 @@
-CREATE DATABASE desperdicio_zero;
+-- Crie o banco e a tabela no phpMyAdmin ou via CLI
+CREATE DATABASE IF NOT EXISTS desperdicio_zero CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE desperdicio_zero;
-
--- Tabela de usuários
-CREATE TABLE usuarios (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100) NOT NULL,
-    email VARCHAR(150) UNIQUE NOT NULL,
-    senha VARCHAR(255) NOT NULL,
-    tipo ENUM('doador','admin') DEFAULT 'doador'
-);
-
--- Tabela de doações
-CREATE TABLE doacoes (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    id_usuario INT,
-    nome_doador VARCHAR(100),
-    tipo_alimento VARCHAR(100),
-    quantidade VARCHAR(50),
-    validade DATE,
-    endereco VARCHAR(200),
-    contato VARCHAR(100),
-    status ENUM('disponível','entregue') DEFAULT 'disponível',
-    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+ 
+CREATE TABLE IF NOT EXISTS doacoes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome_doador VARCHAR(100) NOT NULL,
+  tipo_alimento VARCHAR(100) NOT NULL,
+  quantidade VARCHAR(50),
+  validade DATE,
+  endereco VARCHAR(200),
+  contato VARCHAR(100),
+  status ENUM('disponivel','entregue') DEFAULT 'disponivel',
+  criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
